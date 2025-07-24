@@ -8,17 +8,15 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class ProductServiceClient {
-    private final Environment environment;
     private final RestTemplate restTemplate;
 
-    public ProductServiceClient(Environment environment, RestTemplate restTemplate) {
-        this.environment = environment;
+    public ProductServiceClient(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
-    public ProductDto getProductById(Long id){
-        String url = environment.getProperty("PRODUCT_SERVICE_URL")+"/"+id;
-        ResponseEntity<ProductDto> response = restTemplate.getForEntity("http://localhost:8081/api/products/"+id, ProductDto.class);
+    public ProductDto getProductById(Long productId){
+        String url = "http://ECOMMERCE/api/products/" + productId;
+        ResponseEntity<ProductDto> response = restTemplate.getForEntity(url, ProductDto.class);
         return response.getBody();
     }
 }

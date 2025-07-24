@@ -2,28 +2,24 @@ package com.example.order_service.service;
 
 import com.example.order_service.client.ProductServiceClient;
 import com.example.order_service.dto.CreateOrderResponseDto;
-import com.example.order_service.dto.OrderItemDto;
 import com.example.order_service.dto.OrderRequestDto;
 import com.example.order_service.dto.ProductDto;
 import com.example.order_service.entity.Order;
 import com.example.order_service.entity.OrderItems;
 import com.example.order_service.enums.OrderStatus;
 import com.example.order_service.mapper.OrderMapper;
-import com.example.order_service.repository.OrderItemRepository;
 import com.example.order_service.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class OrderService implements IOrderService{
     private final OrderRepository repository;
-    private final OrderItemRepository orderItemRepository;
+
     private final ProductServiceClient productServiceClient;
-    public OrderService(OrderRepository repository, OrderItemRepository orderItemRepository, ProductServiceClient productServiceClient) {
+    public OrderService(OrderRepository repository, ProductServiceClient productServiceClient) {
         this.repository = repository;
-        this.orderItemRepository = orderItemRepository;
         this.productServiceClient = productServiceClient;
     }
 
